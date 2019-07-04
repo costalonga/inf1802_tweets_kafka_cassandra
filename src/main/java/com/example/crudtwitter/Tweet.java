@@ -105,5 +105,6 @@ public class Tweet {
     //TODO: Finish SETs
     public void setCreatedAt(Date x) { this.CreatedDate = x; }
     public void setId(long x) { this.Id = x; }
+    public void setLanguage(String language) { this.Language = language; }
 }
 

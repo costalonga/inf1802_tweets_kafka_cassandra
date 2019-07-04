@@ -63,7 +63,7 @@ public class TweetRepository {
                 .append("content text,")
                 .append("userName text,")
                 .append("language text,")
-                .append("PRIMARY KEY (id, language));");
+                .append("PRIMARY KEY (language, id));");
         // TODO add Latitude/Longitude and CreatedAt
 
         System.out.println("\tcreateTableTweetsByLang - command: " + sb);
