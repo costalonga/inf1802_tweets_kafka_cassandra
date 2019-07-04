@@ -130,8 +130,6 @@ public class TweetRepository {
                     r.getString("userName"),
                     r.getString("language"));
 
-            // TODO: Finish test
-
             System.out.println("\t\tId = " + r.getLong("id") + ", "
                     + "Message = " + r.getString("content") + ", "
                     + "Latitude = " + r.getString("latitude") + ", "
@@ -141,6 +139,37 @@ public class TweetRepository {
             tweets.add(tw);
         }
         System.out.println("\tselectAll - end\n");
+        return tweets;
+    }
+
+    // Apresentar todas as tuplas da tabela tweets
+    // @return
+    public List<Tweet> selectAllTweetsByLang() {
+        System.out.println("\tselectAllTweetsByLang - init");
+        StringBuilder sb = new StringBuilder("SELECT * FROM ").append(TABLE_NAME_BY_LANG);
+        System.out.println("\tselectAllTweetsByLang - command: " + sb);
+
+        final String query = sb.toString();
+        ResultSet rs = session.execute(query);
+
+        List<Tweet> tweets = new ArrayList<Tweet>();
+
+        for (Row r : rs) {
+            Tweet tw = new Tweet(
+                    r.getLong("id"),
+                    r.getString("content"),
+                   null,
+                    null,
+                    r.getString("userName"),
+                    r.getString("language"));
+
+            System.out.println("\t\tId = " + r.getLong("id") + ", "
+                    + "Message = " + r.getString("content") + ", "
+                    + "User = " + r.getString("userName") + ", "
+                    + "Language = " + r.getString("language"));
+            tweets.add(tw);
+        }
+        System.out.println("\tselectAllTweetsByLang - end\n");
         return tweets;
     }
 

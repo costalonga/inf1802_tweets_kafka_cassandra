@@ -37,6 +37,10 @@ public class HelloTweet {
             tweets.createTable();
             System.out.println("Create table tweets");
 
+            // Cria tabela tweetsByLang
+            tweets.createTableTweetsByLang();
+            System.out.println("Create table tweetsByLang - step 2");
+
 
             // TODO: Change to use twitter4j api to get real tweets
             ArrayList<String> languages = new ArrayList<String>();
@@ -52,12 +56,15 @@ public class HelloTweet {
 
                 Tweet tw = new Tweet(new Long(i), "Message_"+i, lat, lon, "User_"+i, lang);
                 tweets.insertTweet(tw);
-                System.out.println("Inserted tweet");
+                tweets.insertTweetsByLang(tw);
+                System.out.println("Inserted tweet in tables");
             }
 
             tweets.selectAll(); // Apresenta todas as tuplas
+            tweets.selectAllTweetsByLang(); // Apresenta todas as tuplas
             tweets.deleteTweet(new Long(2)); // Deleta um tweet da tabela
             tweets.selectAll();
+            tweets.selectAllTweetsByLang(); // Apresenta todas as tuplas
 
             tweets.deleteTable("tweets");
             System.out.println("Deleted tweets");
