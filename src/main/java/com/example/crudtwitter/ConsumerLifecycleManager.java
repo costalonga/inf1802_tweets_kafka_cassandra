@@ -22,7 +22,7 @@ import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;
 
 
-// Sem utilizar o String Deserializer
+// Sem utilizar o String Deserializer tweet, usando o de String
 
 public class ConsumerLifecycleManager implements LifecycleManager {
 
@@ -61,7 +61,6 @@ public class ConsumerLifecycleManager implements LifecycleManager {
 
             tweet = new Tweet(createdAt,
                     (long) Long.valueOf(Id).longValue(),
-//                    Long.parseLong(Id),
                     Text,
                     Source,
                     IsTruncated,
@@ -71,7 +70,6 @@ public class ConsumerLifecycleManager implements LifecycleManager {
                     User,
                     Language
             );
-
             return tweet;
         }
         return null;
@@ -111,8 +109,6 @@ public class ConsumerLifecycleManager implements LifecycleManager {
         while (i < 5) {  // Apenas como demo, usaremos um loop infinito
             ConsumerRecords<String, String> poll = consumer.poll(Duration.ofMillis(1000));
             for (ConsumerRecord record : poll) {
-//                logger.info(record.topic() + " - " + record.partition() + ":\n" + record.value());
-
                 Tweet temp = converStringToTweet(record.value().toString());
                 if (temp != null) {
                     tweetBuffer.add(temp);
@@ -120,7 +116,6 @@ public class ConsumerLifecycleManager implements LifecycleManager {
                     System.out.println("Consumer got tweet!");
                 }
             }
-//            i++;
 
         }
 
