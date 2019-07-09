@@ -22,25 +22,16 @@ public class TweetRepository {
         StringBuilder sb = new StringBuilder("CREATE TABLE IF NOT EXISTS ")
                 .append(TABLE_NAME).append("(")
                 .append("id bigint PRIMARY KEY, ")
-                .append("CreatedDate text,")
-                .append("Content text,")
-                .append("Source text,")
-                .append("IsTruncated text,")
-                .append("Latitude text,")
-                .append("Longitude text,")
-                .append("IsFavorited text,")
-                .append("UserName text,")
-                .append("Contributors text,")
-                .append("Language text);");
+                .append("createdDate text,")
+                .append("content text,")
+                .append("source text,")
+                .append("isTruncated text,")
+                .append("latitude text,")
+                .append("longitude text,")
+                .append("isFavorited text,")
+                .append("userName text,")
+                .append("language text);");
 
-//        StringBuilder sb = new StringBuilder("CREATE TABLE IF NOT EXISTS ")
-//                .append(TABLE_NAME).append("(")
-//                .append("id long PRIMARY KEY, ")
-//                .append("content text,")
-//                .append("latitude text,")
-//                .append("longitude text,")
-//                .append("userName text,")
-//                .append("language text);");
 
         System.out.println("\tcreateTable - command: " + sb);
         System.out.println("\tcreateTable - end\n");
@@ -123,17 +114,25 @@ public class TweetRepository {
 
         for (Row r : rs) {
             Tweet tw = new Tweet(
+                    r.getString("createdDate"),
                     r.getLong("id"),
                     r.getString("content"),
+                    r.getString("source"),
+                    r.getString("isTruncated"),
                     r.getString("latitude"),
                     r.getString("longitude"),
+                    r.getString("isFavorited"),
                     r.getString("userName"),
                     r.getString("language"));
 
             System.out.println("\t\tId = " + r.getLong("id") + ", "
+                    + "CreatedDate = " + r.getString("createdDate") + ", "
                     + "Message = " + r.getString("content") + ", "
+                    + "Source = " + r.getString("source") + ", "
+                    + "IsTruncated = " + Boolean.toString(r.getBool("isTruncated")) + ", "
                     + "Latitude = " + r.getString("latitude") + ", "
                     + "Longitude = " + r.getString("longitude") + ", "
+                    + "IsFavorited = " + Boolean.toString(r.getBool("isFavorited")) + ", "
                     + "User = " + r.getString("userName") + ", "
                     + "Language = " + r.getString("language"));
             tweets.add(tw);
@@ -156,10 +155,14 @@ public class TweetRepository {
 
         for (Row r : rs) {
             Tweet tw = new Tweet(
+                    null,
                     r.getLong("id"),
                     r.getString("content"),
-                   null,
-                    null,
+                    "",
+                    Boolean.toString(false),
+                    "defaultLatitude",
+                    "defaultLongitude",
+                    Boolean.toString(false),
                     r.getString("userName"),
                     r.getString("language"));
 
