@@ -62,7 +62,7 @@
             <artifactId>activation</artifactId>
             <version>1.1</version>
         </dependency>
-        <dependency>
+<!--         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.9.9</version>
@@ -71,7 +71,7 @@
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
             <version>2.6.0</version>
-        </dependency>
+        </dependency> -->
     </dependencies>
     
 </project>
